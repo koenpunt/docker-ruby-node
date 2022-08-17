@@ -10,22 +10,34 @@ jobs:
   build:
     strategy:
       matrix:
-        ruby_version: [2, 2.7]
-        node_major: [16, 18]
-        variant: [default, slim, alpine]
         include:
-          - ruby_version: 2
+          - ruby_version: 2.7
             node_major: 18
             variant: default
             tag: latest
-          - ruby_version: 2
+            dockerfile: ./default/Dockerfile
+          - ruby_version: 2.7
             node_major: 18
             variant: slim
             tag: slim
-          - ruby_version: 2
+            dockerfile: ./slim/Dockerfile
+          - ruby_version: 2.7
             node_major: 18
             variant: alpine
             tag: alpine
+            dockerfile: ./alpine/node18/Dockerfile
+          - ruby_version: 2.7
+            node_major: 16
+            variant: default
+            dockerfile: ./default/Dockerfile
+          - ruby_version: 2.7
+            node_major: 16
+            variant: slim
+            dockerfile: ./slim/Dockerfile
+          - ruby_version: 2.7
+            node_major: 16
+            variant: alpine
+            dockerfile: ./alpine/node16/Dockerfile
     name: Build default image
     runs-on: ubuntu-latest
     steps:
@@ -66,7 +78,7 @@ jobs:
         id: build
         uses: docker/build-push-action@v3
         with:
-          context: ./${{ matrix.variant }}
+          dockerfile: ${{ matrix.dockerfile }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
