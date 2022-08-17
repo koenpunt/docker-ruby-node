@@ -30,12 +30,9 @@ RUN set -ex \
     gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key" ; \
   done
 
-ARG NODE_MAJOR=10
+ARG NODE_VERSION=18.7.0
 
-RUN NODE_VERSION=$(curl -SL "https://nodejs.org/dist/index.tab" \
-  | grep "^v$NODE_MAJOR" \
-  | head -n 1 | awk '{ print substr($1,2) }') \
-  && buildDeps='xz-utils' \
+RUN buildDeps='xz-utils' \
     && ARCH= && dpkgArch="$(dpkg --print-architecture)" \
     && case "${dpkgArch##*-}" in \
       amd64) ARCH='x64';; \

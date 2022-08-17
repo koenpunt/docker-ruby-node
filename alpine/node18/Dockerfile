@@ -2,7 +2,7 @@ ARG RUBY_VERSION
 
 FROM ruby:${RUBY_VERSION}-alpine
 
-ARG NODE_MAJOR=18
+ENV NODE_VERSION 18.7.0
 
 RUN addgroup -g 1000 node \
     && adduser -u 1000 -G node -s /bin/sh -D node \
@@ -10,9 +10,6 @@ RUN addgroup -g 1000 node \
         libstdc++ \
     && apk add --no-cache --virtual .build-deps \
         curl \
-    && NODE_VERSION=$(curl -SL "https://nodejs.org/dist/index.tab" \
-        | grep "^v$NODE_MAJOR" \
-        | head -n 1 | awk '{ print substr($1,2) }') \
     && ARCH= && alpineArch="$(apk --print-arch)" \
       && case "${alpineArch##*-}" in \
         x86_64) \

@@ -10,9 +10,9 @@ Currently available combinations:
 
 ## Supported tags
 
-- `latest`, `2-16`, `2.7-16`, `2-18`, `2.7-18`
-- `slim`, `2-16-slim`, `2.7-16-slim`, `2-18-slim`, `2.7-18-slim`
-- `alpine`, `2-16-alpine`, `2.7-16-alpine`, `2-18-alpine`, `2.7-18-alpine`
+- `latest`, `2.7-16`, `2.7-18`
+- `slim`, `2.7-16-slim`, `2.7-18-slim`
+- `alpine`, `2.7-16-alpine`, `2.7-18-alpine`
 
 ## Why Node.js and Ruby together?
 

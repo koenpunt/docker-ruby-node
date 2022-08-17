@@ -13,29 +13,35 @@ jobs:
         include:
           - ruby_version: 2.7
             node_major: 18
+            node_version: 18.7.0
             variant: default
             tag: latest
             dockerfile: ./default/Dockerfile
           - ruby_version: 2.7
             node_major: 18
+            node_version: 18.7.0
             variant: slim
             tag: slim
             dockerfile: ./slim/Dockerfile
           - ruby_version: 2.7
             node_major: 18
+            node_version: 18.7.0
             variant: alpine
             tag: alpine
             dockerfile: ./alpine/node18/Dockerfile
           - ruby_version: 2.7
             node_major: 16
+            node_version: 16.17.0
             variant: default
             dockerfile: ./default/Dockerfile
           - ruby_version: 2.7
             node_major: 16
+            node_version: 16.17.0
             variant: slim
             dockerfile: ./slim/Dockerfile
           - ruby_version: 2.7
             node_major: 16
+            node_version: 16.17.0
             variant: alpine
             dockerfile: ./alpine/node16/Dockerfile
     name: Build default image
@@ -78,7 +84,7 @@ jobs:
         id: build
         uses: docker/build-push-action@v3
         with:
-          dockerfile: ${{ matrix.dockerfile }}
+          file: ${{ matrix.dockerfile }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -87,7 +93,7 @@ jobs:
           build-args: |
             DISTRO=buster
             RUBY_VERSION=${{ matrix.ruby_version }}
-            NODE_MAJOR=${{ matrix.node_major }}
+            NODE_VERSION=${{ matrix.node_version }}
 
       # Temp fix
       # https://github.com/docker/build-push-action/issues/252
