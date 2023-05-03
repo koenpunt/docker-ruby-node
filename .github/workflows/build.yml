@@ -10,40 +10,30 @@ jobs:
     strategy:
       matrix:
         include:
-          - ruby_version: 2.7
+          - ruby_version: 3.2
             node_major: 18
-            node_version: 18.7.0
-            variant: default
-            tag: latest
-            dockerfile: ./default/Dockerfile
-          - ruby_version: 2.7
-            node_major: 18
-            node_version: 18.7.0
-            variant: slim
-            tag: slim
-            dockerfile: ./slim/Dockerfile
-          - ruby_version: 2.7
-            node_major: 18
-            node_version: 18.7.0
+            node_version: 18.18.2
             variant: alpine
             tag: alpine
             dockerfile: ./alpine/node18/Dockerfile
-          - ruby_version: 2.7
-            node_major: 16
-            node_version: 16.17.0
-            variant: default
-            dockerfile: ./default/Dockerfile
-          - ruby_version: 2.7
-            node_major: 16
-            node_version: 16.17.0
-            variant: slim
-            dockerfile: ./slim/Dockerfile
-          - ruby_version: 2.7
-            node_major: 16
-            node_version: 16.17.0
+          - ruby_version: 3.2
+            node_major: 18
+            node_version: 18.18.2
+            variant: bookworm
+            default: true
+            dockerfile: ./bookworm/node18/Dockerfile
+          - ruby_version: 3.2
+            node_version: 20.9.0
+            node_major: 20
             variant: alpine
-            dockerfile: ./alpine/node16/Dockerfile
-    name: Build image
+            dockerfile: ./alpine/node20/Dockerfile
+          - ruby_version: 3.2
+            node_version: 20.9.0
+            node_major: 20
+            variant: bookworm
+            default: true
+            dockerfile: ./bookworm/node20/Dockerfile
+    name: Build image ${{ matrix.ruby_version }}-${{ matrix.node_major }}-${{ matrix.variant }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -75,8 +65,8 @@ jobs:
           images: |
             koen/ruby-node
           tags: |
-            type=raw,value=${{ matrix.ruby_version }}-${{ matrix.node_major }},enable=${{ matrix.variant == 'default' }}
-            type=raw,value=${{ matrix.ruby_version }}-${{ matrix.node_major }}-${{ matrix.variant }},enable=${{ matrix.variant != 'default' }}
+            type=raw,value=${{ matrix.ruby_version }}-${{ matrix.node_major }},enable=${{ !!matrix.default }}
+            type=raw,value=${{ matrix.ruby_version }}-${{ matrix.node_major }}-${{ matrix.variant }}
             type=raw,value=${{ matrix.tag }},enable=${{ !!matrix.tag }}
 
       - name: Build and push
