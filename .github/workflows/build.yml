@@ -32,6 +32,7 @@ jobs:
             node_major: 20
             variant: bookworm
             default: true
+            tag: latest
             dockerfile: ./bookworm/node20/Dockerfile
     name: Build image ${{ matrix.ruby_version }}-${{ matrix.node_major }}-${{ matrix.variant }}
     runs-on: ubuntu-latest
