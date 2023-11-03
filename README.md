@@ -6,13 +6,12 @@ Both Ruby and Node.js are based on official images.
 
 Currently available combinations:
 
-- Ruby: 2.7 Node: 16.x, 18.x
+- Ruby: 3.2 Node: 18.x, 20.x
 
 ## Supported tags
 
-- `latest`, `2.7-16`, `2.7-18`
-- `slim`, `2.7-16-slim`, `2.7-18-slim`
-- `alpine`, `2.7-16-alpine`, `2.7-18-alpine`
+- `latest`, `3.2-18`, `3.2-20`
+- `alpine`, `3.2-18-alpine`, `3.2-20-alpine`
 
 ## Why Node.js and Ruby together?
 
@@ -46,10 +45,6 @@ Based on Debian distribution.
 
 This is the smalles image possible. It is based on the Alpine Linux base image.
 
-## Default Locale
-
-Versions 2-6, 2-8, 2-10 has defined locale C.UTF-8 instead default POSIX.
-
 ## License
 
 This Docker image is licensed under the [MIT License](https://github.com/koenpunt/docker-ruby-node/blob/master/LICENSE).
@@ -58,12 +53,6 @@ Software contained in this image is licensed under the following:
 
 - Ruby: [GPLv2](https://github.com/ruby/ruby/blob/trunk/GPL)
 - Node.js: [MIT License](https://github.com/nodejs/node/blob/master/LICENSE)
-
-## Supported Docker versions
-
-This image is officially supported on Docker versions v17, v18.
-
-Support for older versions (down to v1.0) is provided on a best-effort basis.
 
 ## User Feedback
 
