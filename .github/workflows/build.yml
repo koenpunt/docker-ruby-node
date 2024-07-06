@@ -31,6 +31,16 @@ jobs:
             node_version: 20.9.0
             node_major: 20
             variant: bookworm
+            dockerfile: ./bookworm/node20/Dockerfile
+          - ruby_version: 3.3
+            node_version: 20.15.0
+            node_major: 20
+            variant: alpine
+            dockerfile: ./alpine/node20/Dockerfile
+          - ruby_version: 3.3
+            node_version: 20.15.0
+            node_major: 20
+            variant: bookworm
             default: true
             dockerfile: ./bookworm/node20/Dockerfile
     name: Build image ${{ matrix.ruby_version }}-${{ matrix.node_major }}-${{ matrix.variant }}
