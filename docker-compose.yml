@@ -1,24 +1,4 @@
 services:
-  rubynode-3.2-18-alpine:
-    image: koen/ruby-node:3.2-18-alpine
-    build:
-      context: ./alpine/node18
-      platforms:
-        - linux/amd64
-      args:
-        RUBY_VERSION: "3.2"
-        NODE_VERSION: "18.7.0"
-
-  rubynode-3.2-18-bookworm:
-    image: koen/ruby-node:3.2-18-bookworm
-    build:
-      context: ./bookworm/node18
-      platforms:
-        - linux/amd64
-      args:
-        RUBY_VERSION: "3.2"
-        NODE_VERSION: "18.18.2"
-
   rubynode-3.2-20-alpine:
     image: koen/ruby-node:3.2-20-alpine
     build:

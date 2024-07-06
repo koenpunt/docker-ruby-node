@@ -6,12 +6,12 @@ Both Ruby and Node.js are based on official images.
 
 Currently available combinations:
 
-- Ruby: 3.2 Node: 18.x, 20.x
+- Ruby: 3.2 & 3.3 Node: 18.x & 20.x
 
 ## Supported tags
 
-- `latest`, `3.2-18`, `3.2-20`
-- `alpine`, `3.2-18-alpine`, `3.2-20-alpine`
+- `latest`, `3.2-18`, `3.2-20`, `3.3-20`
+- `alpine`, `3.2-18-alpine`, `3.2-20-alpine`, `3.3-20-alpine`
 
 ## Why Node.js and Ruby together?
 

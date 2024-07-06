@@ -11,18 +11,6 @@ jobs:
       matrix:
         include:
           - ruby_version: 3.2
-            node_major: 18
-            node_version: 18.18.2
-            variant: alpine
-            tag: alpine
-            dockerfile: ./alpine/node18/Dockerfile
-          - ruby_version: 3.2
-            node_major: 18
-            node_version: 18.18.2
-            variant: bookworm
-            default: true
-            dockerfile: ./bookworm/node18/Dockerfile
-          - ruby_version: 3.2
             node_version: 20.9.0
             node_major: 20
             variant: alpine
