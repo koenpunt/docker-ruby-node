@@ -2,7 +2,7 @@ ARG RUBY_VERSION
 
 FROM ruby:${RUBY_VERSION}-alpine
 
-ARG NODE_VERSION=20.9.0
+ENV NODE_VERSION 20.15.0
 
 RUN addgroup -g 1000 node \
     && adduser -u 1000 -G node -s /bin/sh -D node \
@@ -10,12 +10,14 @@ RUN addgroup -g 1000 node \
         libstdc++ \
     && apk add --no-cache --virtual .build-deps \
         curl \
-    && ARCH= && alpineArch="$(apk --print-arch)" \
+    && ARCH= OPENSSL_ARCH='linux*' && alpineArch="$(apk --print-arch)" \
       && case "${alpineArch##*-}" in \
-        x86_64) \
-          ARCH='x64' \
-          CHECKSUM="a3cfa3eabebdcbb677256227b9ff44dad88bff37fd9de886077d670dc8fddb6b" \
-          ;; \
+        x86_64) ARCH='x64' CHECKSUM="24a21bc2fd2caf300ea36d716fbfa29ababa8a41bb844e67b6cf8b3d5091792c" OPENSSL_ARCH=linux-x86_64;; \
+        x86) OPENSSL_ARCH=linux-elf;; \
+        aarch64) OPENSSL_ARCH=linux-aarch64;; \
+        arm*) OPENSSL_ARCH=linux-armv4;; \
+        ppc64le) OPENSSL_ARCH=linux-ppc64le;; \
+        s390x) OPENSSL_ARCH=linux-s390x;; \
         *) ;; \
       esac \
   && if [ -n "${CHECKSUM}" ]; then \
@@ -36,6 +38,7 @@ RUN addgroup -g 1000 node \
         linux-headers \
         make \
         python3 \
+        py-setuptools \
     # use pre-existing gpg directory, see https://github.com/nodejs/docker-node/pull/1895#issuecomment-1550389150
     && export GNUPGHOME="$(mktemp -d)" \
     # gpg keys listed at https://github.com/nodejs/node#release-keys
@@ -51,6 +54,7 @@ RUN addgroup -g 1000 node \
       C82FA3AE1CBEDC6BE46B9360C43CEC45C17AB93C \
       108F52B48DB57BB0CC439B2997B01419BD92F80A \
       A363A499291CBBC940DD62E41F10027AF002F8B0 \
+      CC68F5A3106FF448322E48ED27F5E38D5B0A215F \
     ; do \
       gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$key" || \
       gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key" ; \
@@ -72,22 +76,29 @@ RUN addgroup -g 1000 node \
     && rm "node-v$NODE_VERSION.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt; \
   fi \
   && rm -f "node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz" \
+  # Remove unused OpenSSL headers to save ~34MB. See this NodeJS issue: https://github.com/nodejs/node/issues/46451
+  && find /usr/local/include/node/openssl/archs -mindepth 1 -maxdepth 1 ! -name "$OPENSSL_ARCH" -exec rm -rf {} \; \
   && apk del .build-deps \
   # smoke tests
   && node --version \
   && npm --version
 
+ENV YARN_VERSION 1.22.22
+
 RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
+  # use pre-existing gpg directory, see https://github.com/nodejs/docker-node/pull/1895#issuecomment-1550389150
+  && export GNUPGHOME="$(mktemp -d)" \
   && for key in \
     6A010C5166006599AA17F08146C2130DFD2497F5 \
   ; do \
     gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$key" || \
     gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key" ; \
   done \
-  && YARN_VERSION=$(curl -sSL --compressed https://yarnpkg.com/latest-version) \
   && curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
   && curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz.asc" \
   && gpg --batch --verify yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
+  && gpgconf --kill all \
+  && rm -rf "$GNUPGHOME" \
   && mkdir -p /opt \
   && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
   && ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
@@ -95,4 +106,5 @@ RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
   && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
   && apk del .build-deps-yarn \
   # smoke test
-  && yarn --version
+  && yarn --version \
+  && rm -rf /tmp/*
