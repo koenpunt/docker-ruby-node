@@ -10,8 +10,9 @@ Currently available combinations:
 
 ## Supported tags
 
-- `latest`, `3.2-18`, `3.2-20`, `3.3-20`
-- `alpine`, `3.2-18-alpine`, `3.2-20-alpine`, `3.3-20-alpine`
+There are `latest` and `alpine` tags available for this image.
+
+For all available tags, see the [Docker Hub repository](https://hub.docker.com/r/koen/ruby-node/tags).
 
 ## Why Node.js and Ruby together?
 
@@ -32,18 +33,18 @@ $ docker run -v "$PWD":/usr/src/app -p "8080:8080" koen/ruby-node
 
 ## Image Variants
 
-The `koen/ruby-node` images come in three flavors, each designed for a
+The `koen/ruby-node` images come in two flavors, both designed for a
 specific use case.
 
 `koen/ruby-node:latest`
 
 This is the defacto image. If you are unsure about what your needs are, you
-probably want to use this one. It is designed to be used both as a throw away container (mount your source code and start the container to start your app), as well as the base to build other images off of.
+probably want to use this one. It is designed to be used both as a throwaway container (mount your source code and start the container to start your app), as well as the base to build other images off of.
 Based on Debian distribution.
 
 `koen/ruby-node:alpine`
 
-This is the smalles image possible. It is based on the Alpine Linux base image.
+This is the smallest image possible. It is based on the Alpine Linux base image.
 
 ## License
 
@@ -78,16 +79,3 @@ issue](https://github.com/koenpunt/docker-ruby-node/issues), especially for
 more ambitious contributions. This gives other contributors a chance to point
 you in the right direction, give you feedback on your design, and help you find
 out if someone else is working on the same thing.
-
-### Collaborators
-
-Individuals making significant and valuable contributions are made Collaborators
-and given commit-access to the project. These individuals are identified by the
-existing Collaborators and their addition as Collaborators is discussed as a
-pull request to this project's README.md.
-
-Note: If you make a significant contribution and are not considered for
-commit-access log an issue or contact one of the Collaborators directly.
-
-- Radovan Šmitala - @radeno
-- Hans Kristian Flaatten - @Starefossen
