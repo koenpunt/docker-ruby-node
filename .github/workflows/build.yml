@@ -26,9 +26,17 @@ jobs:
           - ruby_version: 3.3
             node_major: 20
             variant: bookworm
+            dockerfile: ./bookworm/node20/Dockerfile
+          - ruby_version: 3.4
+            node_major: 22
+            variant: alpine
+            dockerfile: ./alpine/node22/Dockerfile
+          - ruby_version: 3.4
+            node_major: 22
+            variant: bookworm
             default: true
             tag: latest
-            dockerfile: ./bookworm/node20/Dockerfile
+            dockerfile: ./bookworm/node22/Dockerfile
     name: Build image ${{ matrix.ruby_version }}-${{ matrix.node_major }}-${{ matrix.variant }}
     runs-on: ubuntu-latest
     steps:

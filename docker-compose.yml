@@ -17,6 +17,15 @@ services:
       args:
         RUBY_VERSION: "3.3"
 
+  rubynode-3.4-22-alpine:
+    image: koen/ruby-node:3.4-22-alpine
+    build:
+      context: ./alpine/node22
+      platforms:
+        - linux/amd64
+      args:
+        RUBY_VERSION: "3.4"
+
   rubynode-3.2-20-bookworm:
     image: koen/ruby-node:3.2-20-bookworm
     build:
@@ -34,3 +43,12 @@ services:
         - linux/amd64
       args:
         RUBY_VERSION: "3.3"
+
+  rubynode-3.4-22-bookworm:
+    image: koen/ruby-node:3.4-22-bookworm
+    build:
+      context: ./bookworm/node22
+      platforms:
+        - linux/amd64
+      args:
+        RUBY_VERSION: "3.4"
