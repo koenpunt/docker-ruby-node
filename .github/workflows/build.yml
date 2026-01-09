@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - '**'
 
 jobs:
   build:
@@ -34,9 +34,17 @@ jobs:
           - ruby_version: 3.4
             node_major: 22
             variant: bookworm
+            dockerfile: ./bookworm/node22/Dockerfile
+          - ruby_version: 4.0
+            node_major: 24
+            variant: alpine
+            dockerfile: ./alpine/node24/Dockerfile
+          - ruby_version: 4.0
+            node_major: 24
+            variant: bookworm
             default: true
             tag: latest
-            dockerfile: ./bookworm/node22/Dockerfile
+            dockerfile: ./bookworm/node24/Dockerfile
     name: Build image ${{ matrix.ruby_version }}-${{ matrix.node_major }}-${{ matrix.variant }}
     runs-on: ubuntu-latest
     steps:
@@ -78,7 +86,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           file: ${{ matrix.dockerfile }}
-          push: true
+          push: ${{ github.ref == 'refs/heads/main' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=local,src=/tmp/.buildx-cache
