@@ -6,7 +6,12 @@ Both Ruby and Node.js are based on official images.
 
 Currently available combinations:
 
-- Ruby: 3.2 & 3.3 Node: 18.x & 20.x
+
+|   | Ruby 3.2 | Ruby 3.3 | Ruby 3.4 | Ruby 4.0 |
+| ---- | --- | --- | --- | --- | 
+| Node 20 | ✅ | ✅ 
+| Node 22 |  | | ✅
+| Node 24 | | | | ✅
 
 ## Supported tags
 
