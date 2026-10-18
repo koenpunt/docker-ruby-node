@@ -1,0 +1,97 @@
+{
+  "ruby": {
+    "3.3": "3.3.12",
+    "3.4": "3.4.11",
+    "4.0": "4.0.7"
+  },
+  "node": {
+    "22": "22.23.3",
+    "24": "24.22.0"
+  },
+  "images": [
+    {
+      "ruby_version": "3.3",
+      "node_major": "22",
+      "variant": "bookworm",
+      "dockerfile": "./bookworm/node22/Dockerfile",
+      "tags": "3.3-22-bookworm,3.3-22"
+    },
+    {
+      "ruby_version": "3.3",
+      "node_major": "22",
+      "variant": "alpine",
+      "dockerfile": "./alpine/node22/Dockerfile",
+      "tags": "3.3-22-alpine"
+    },
+    {
+      "ruby_version": "3.3",
+      "node_major": "24",
+      "variant": "bookworm",
+      "dockerfile": "./bookworm/node24/Dockerfile",
+      "tags": "3.3-24-bookworm,3.3-24"
+    },
+    {
+      "ruby_version": "3.3",
+      "node_major": "24",
+      "variant": "alpine",
+      "dockerfile": "./alpine/node24/Dockerfile",
+      "tags": "3.3-24-alpine"
+    },
+    {
+      "ruby_version": "3.4",
+      "node_major": "22",
+      "variant": "bookworm",
+      "dockerfile": "./bookworm/node22/Dockerfile",
+      "tags": "3.4-22-bookworm,3.4-22"
+    },
+    {
+      "ruby_version": "3.4",
+      "node_major": "22",
+      "variant": "alpine",
+      "dockerfile": "./alpine/node22/Dockerfile",
+      "tags": "3.4-22-alpine"
+    },
+    {
+      "ruby_version": "3.4",
+      "node_major": "24",
+      "variant": "bookworm",
+      "dockerfile": "./bookworm/node24/Dockerfile",
+      "tags": "3.4-24-bookworm,3.4-24"
+    },
+    {
+      "ruby_version": "3.4",
+      "node_major": "24",
+      "variant": "alpine",
+      "dockerfile": "./alpine/node24/Dockerfile",
+      "tags": "3.4-24-alpine"
+    },
+    {
+      "ruby_version": "4.0",
+      "node_major": "22",
+      "variant": "bookworm",
+      "dockerfile": "./bookworm/node22/Dockerfile",
+      "tags": "4.0-22-bookworm,4.0-22"
+    },
+    {
+      "ruby_version": "4.0",
+      "node_major": "22",
+      "variant": "alpine",
+      "dockerfile": "./alpine/node22/Dockerfile",
+      "tags": "4.0-22-alpine"
+    },
+    {
+      "ruby_version": "4.0",
+      "node_major": "24",
+      "variant": "bookworm",
+      "dockerfile": "./bookworm/node24/Dockerfile",
+      "tags": "4.0-24-bookworm,4.0-24,latest"
+    },
+    {
+      "ruby_version": "4.0",
+      "node_major": "24",
+      "variant": "alpine",
+      "dockerfile": "./alpine/node24/Dockerfile",
+      "tags": "4.0-24-alpine,alpine"
+    }
+  ]
+}
