@@ -6,7 +6,7 @@ FROM ruby:${RUBY_VERSION}-alpine3.24
 
 # Below is verbatim from https://github.com/nodejs/docker-node/blob/main/24/alpine3.24/Dockerfile
 
-ENV NODE_VERSION=24.22.0
+ENV NODE_VERSION=24.22.1
 
 RUN addgroup -g 1000 node \
     && adduser -u 1000 -G node -s /bin/sh -D node \
