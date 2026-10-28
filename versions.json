@@ -1,12 +1,13 @@
 {
   "ruby": {
-    "3.3": "3.3.12",
-    "3.4": "3.4.11",
-    "4.0": "4.0.7"
+    "3.3": "3.3.13",
+    "3.4": "3.4.12",
+    "4.0": "4.0.9"
   },
   "node": {
     "22": "22.23.4",
-    "24": "24.22.1"
+    "24": "24.22.2",
+    "26": "26.13.0"
   },
   "images": [
     {
@@ -38,6 +39,20 @@
       "tags": "3.3-24-alpine"
     },
     {
+      "ruby_version": "3.3",
+      "node_major": "26",
+      "variant": "bookworm",
+      "dockerfile": "./bookworm/node26/Dockerfile",
+      "tags": "3.3-26-bookworm,3.3-26"
+    },
+    {
+      "ruby_version": "3.3",
+      "node_major": "26",
+      "variant": "alpine",
+      "dockerfile": "./alpine/node26/Dockerfile",
+      "tags": "3.3-26-alpine"
+    },
+    {
       "ruby_version": "3.4",
       "node_major": "22",
       "variant": "bookworm",
@@ -66,6 +81,20 @@
       "tags": "3.4-24-alpine"
     },
     {
+      "ruby_version": "3.4",
+      "node_major": "26",
+      "variant": "bookworm",
+      "dockerfile": "./bookworm/node26/Dockerfile",
+      "tags": "3.4-26-bookworm,3.4-26"
+    },
+    {
+      "ruby_version": "3.4",
+      "node_major": "26",
+      "variant": "alpine",
+      "dockerfile": "./alpine/node26/Dockerfile",
+      "tags": "3.4-26-alpine"
+    },
+    {
       "ruby_version": "4.0",
       "node_major": "22",
       "variant": "bookworm",
@@ -84,14 +113,28 @@
       "node_major": "24",
       "variant": "bookworm",
       "dockerfile": "./bookworm/node24/Dockerfile",
-      "tags": "4.0-24-bookworm,4.0-24,latest"
+      "tags": "4.0-24-bookworm,4.0-24"
     },
     {
       "ruby_version": "4.0",
       "node_major": "24",
       "variant": "alpine",
       "dockerfile": "./alpine/node24/Dockerfile",
-      "tags": "4.0-24-alpine,alpine"
+      "tags": "4.0-24-alpine"
+    },
+    {
+      "ruby_version": "4.0",
+      "node_major": "26",
+      "variant": "bookworm",
+      "dockerfile": "./bookworm/node26/Dockerfile",
+      "tags": "4.0-26-bookworm,4.0-26,latest"
+    },
+    {
+      "ruby_version": "4.0",
+      "node_major": "26",
+      "variant": "alpine",
+      "dockerfile": "./alpine/node26/Dockerfile",
+      "tags": "4.0-26-alpine,alpine"
     }
   ]
 }
